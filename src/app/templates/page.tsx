@@ -44,38 +44,39 @@ const templates = [
 export default function Templates() {
   return (
     <MainLayout>
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Templates</h1>
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 md:mb-6">
+          <h1 className="text-2xl md:text-3xl font-bold">Templates</h1>
           <button
-            className="flex items-center px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded-md transition-colors"
+            className="flex items-center px-3 py-2 md:px-4 md:py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded-md transition-colors"
           >
             <Plus className="mr-2 h-4 w-4" />
             Create Template
           </button>
         </div>
         
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-4">Favorites</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Favorites section */}
+        <div className="mb-6 md:mb-8">
+          <h2 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Favorites</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {templates
               .filter(template => template.isFavorite)
               .map(template => (
                 <div 
                   key={template.id}
-                  className="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-6 border border-zinc-200 dark:border-zinc-700 hover:shadow-md transition-shadow"
+                  className="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-4 md:p-6 border border-zinc-200 dark:border-zinc-700 hover:shadow-md transition-all duration-200"
                 >
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex items-center">
-                      <LayoutTemplate className="h-5 w-5 text-yellow-500 mr-2" />
-                      <h3 className="font-semibold">{template.name}</h3>
+                      <LayoutTemplate className="h-5 w-5 text-yellow-500 mr-2 flex-shrink-0" />
+                      <h3 className="font-semibold text-sm md:text-base line-clamp-1">{template.name}</h3>
                     </div>
-                    <button className="text-yellow-500">
-                      <Star className="h-5 w-5 fill-yellow-500" />
+                    <button className="text-yellow-500 flex-shrink-0 p-1 hover:bg-yellow-100 dark:hover:bg-yellow-900/20 rounded-full transition-colors">
+                      <Star className="h-4 w-4 md:h-5 md:w-5 fill-yellow-500" />
                     </button>
                   </div>
                   
-                  <div className="mb-4">
+                  <div className="mb-3 md:mb-4">
                     <span 
                       className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
                         template.platform === 'LinkedIn' 
@@ -89,21 +90,21 @@ export default function Templates() {
                     </span>
                   </div>
                   
-                  <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-4">
+                  <p className="text-xs md:text-sm text-zinc-600 dark:text-zinc-300 mb-4 line-clamp-2">
                     {template.description}
                   </p>
                   
                   <div className="flex justify-between items-center">
                     <Link
                       href={`/new-post?template=${template.id}`}
-                      className="flex items-center text-sm text-yellow-600 dark:text-yellow-400 hover:underline"
+                      className="flex items-center text-xs md:text-sm text-yellow-600 dark:text-yellow-400 hover:underline hover:text-yellow-700 dark:hover:text-yellow-300 transition-colors"
                     >
                       Use template <ArrowUpRight className="ml-1 h-3 w-3" />
                     </Link>
                     
                     <div className="flex space-x-1">
                       <button
-                        className="p-1 rounded text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+                        className="p-1 rounded-full text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors"
                         aria-label="Edit template"
                       >
                         <Edit className="h-4 w-4" />
@@ -115,27 +116,28 @@ export default function Templates() {
           </div>
         </div>
         
+        {/* All Templates section */}
         <div>
-          <h2 className="text-xl font-semibold mb-4">All Templates</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">All Templates</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {templates
               .filter(template => !template.isFavorite)
               .map(template => (
                 <div 
                   key={template.id}
-                  className="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-6 border border-zinc-200 dark:border-zinc-700 hover:shadow-md transition-shadow"
+                  className="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-4 md:p-6 border border-zinc-200 dark:border-zinc-700 hover:shadow-md transition-all duration-200"
                 >
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex items-center">
-                      <LayoutTemplate className="h-5 w-5 text-zinc-500 mr-2" />
-                      <h3 className="font-semibold">{template.name}</h3>
+                      <LayoutTemplate className="h-5 w-5 text-zinc-500 mr-2 flex-shrink-0" />
+                      <h3 className="font-semibold text-sm md:text-base line-clamp-1">{template.name}</h3>
                     </div>
-                    <button className="text-zinc-300 dark:text-zinc-600 hover:text-yellow-500 dark:hover:text-yellow-500">
-                      <Star className="h-5 w-5" />
+                    <button className="text-zinc-300 dark:text-zinc-600 hover:text-yellow-500 dark:hover:text-yellow-500 flex-shrink-0 p-1 hover:bg-zinc-100 dark:hover:bg-zinc-700 rounded-full transition-colors">
+                      <Star className="h-4 w-4 md:h-5 md:w-5" />
                     </button>
                   </div>
                   
-                  <div className="mb-4">
+                  <div className="mb-3 md:mb-4">
                     <span 
                       className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
                         template.platform === 'LinkedIn' 
@@ -149,27 +151,27 @@ export default function Templates() {
                     </span>
                   </div>
                   
-                  <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-4">
+                  <p className="text-xs md:text-sm text-zinc-600 dark:text-zinc-300 mb-4 line-clamp-2">
                     {template.description}
                   </p>
                   
                   <div className="flex justify-between items-center">
                     <Link
                       href={`/new-post?template=${template.id}`}
-                      className="flex items-center text-sm text-yellow-600 dark:text-yellow-400 hover:underline"
+                      className="flex items-center text-xs md:text-sm text-yellow-600 dark:text-yellow-400 hover:underline hover:text-yellow-700 dark:hover:text-yellow-300 transition-colors"
                     >
                       Use template <ArrowUpRight className="ml-1 h-3 w-3" />
                     </Link>
                     
                     <div className="flex space-x-1">
                       <button
-                        className="p-1 rounded text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+                        className="p-1 rounded-full text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors"
                         aria-label="Edit template"
                       >
                         <Edit className="h-4 w-4" />
                       </button>
                       <button
-                        className="p-1 rounded text-zinc-400 hover:text-red-600"
+                        className="p-1 rounded-full text-zinc-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                         aria-label="Delete template"
                       >
                         <Trash className="h-4 w-4" />
